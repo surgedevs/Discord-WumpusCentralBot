@@ -21,6 +21,9 @@ with open(config_path) as clientConfigFile:
 discordAuthToken = str(userConfig['discordAuth'])
 channelSupportChanges = str(clientConfig['secondsBetweenContentNextVerify'])
 channelDatamining = str(clientConfig['secondsBetweenContentNextVerify'])
+SupportChangesGitLabRSS = str('https://gitlab.com/derpystuff/discord-support/-/commits/main?format=atom')
+AssetsChangesGitLabRSS = str('https://gitlab.com/derpystuff/discord-asset-datamining/-/commits/master?format=atom')
+
 verifyCooldown = int(clientConfig['secondsBetweenContentNextVerify'])
 
 ## Idk what is that thing doing but okay :troll:
