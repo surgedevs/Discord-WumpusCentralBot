@@ -6,12 +6,15 @@
 
 import discord # pip install py-cord - not discordpy
 import json
+import os
 
 ## Loading all configuration files which will be used by our client and bot
-with open('config/userConfig.json') as userConfigFile:
+config_path = os.path.join(os.path.dirname(__file__), 'config', 'userConfig.json')
+with open(config_path) as userConfigFile:
     userConfig = json.load(userConfigFile)
 
-with open('config/clientConfig.json') as clientConfigFile:
+config_path = os.path.join(os.path.dirname(__file__), 'config', 'clientConfig.json')
+with open(config_path) as clientConfigFile:
     clientConfig = json.load(clientConfigFile)
 
 ## Def of all main and important variables which will be used later in our code
