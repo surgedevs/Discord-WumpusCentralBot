@@ -1,14 +1,11 @@
-##
 ## Author: @DzikStar
 ## Contributors: @DzikStar
 ##
 ## Description:
 ## This is main.py while which we will be using for running this bot.
-##
 
+import discord # pip install py-cord - not discordpy
 import json
-import requests
-import discord
 
 # Loading all configuration files which will be used by our client and bot
 with open('userConfig.json') as userConfigFile:
@@ -18,7 +15,10 @@ with open('clientConfig.json') as clientConfigFile:
     clientConfig = json.load(clientConfigFile)
 
 # Def of all main and important variables which will be used later in our code
-discordAuthToken = userConfig['discordAuth']
+discordAuthToken = str(userConfig['discordAuth'])
+channelSupportChanges = str(clientConfig['secondsBetweenContentNextVerify'])
+channelDatamining = str(clientConfig['secondsBetweenContentNextVerify'])
+verifyCooldown = int(clientConfig['secondsBetweenContentNextVerify'])
 
 # Idk what is that thing doing but okay :troll:
 bot = discord.Bot()

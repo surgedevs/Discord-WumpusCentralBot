@@ -1,1 +1,7 @@
-{}
+{
+    "secondsBetweenContentNextVerify": 60,
+    "channels": {
+        "supportChangesChannel": "idGoesThere",
+        "dataminingChannel": "idGoesThere"
+    }
+}
