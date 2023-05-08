@@ -36,4 +36,4 @@ def supportTracker(stage):
     if stage == 1:
         logMessage = f'{Fore.MAGENTA}[Support Tracker]{Fore.RESET} Started downloading files.'
         return logMessage
-        del stage
+        del stage, logMessage

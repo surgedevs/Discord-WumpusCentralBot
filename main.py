@@ -32,7 +32,14 @@ async def testing(ctx):
 ## Place for Bot tasks
 async def supportTrackerTask():
     await bot.wait_until_ready()
+    firstLaunch = bool(True)
     while True:
+        if firstLaunch == True:
+            ## Downloading two RSS files
+            ## First file is older, it's from our database repository
+            ## Seconds is a new file, it's RSS from big nutty GitLab repository
+            supportTask.importAllFiles(GHPAtoken=userConfig['githubDatabasePAToken'])
+
         print(workerLogs.supportTracker(stage=1))
 
         ## Everything is done now so this task can now wait until next loop

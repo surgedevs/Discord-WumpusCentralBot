@@ -1,3 +1,5 @@
 {
-    "discordAuth": "BotTokenGoesThere"
+    "discordAuth": "BotTokenGoesThere",
+    "githubDatabasePAToken": "PersonalAccesTokenGoesThere",
+    "githubAuth": "TokenGoesThere"
 }
