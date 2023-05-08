@@ -10,6 +10,7 @@ import os
 import time
 import asyncio
 from utils import workerLogs
+from lib import supportTask
 
 ## Loading all configuration files which will be used by our client and bot
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'userConfig.json')

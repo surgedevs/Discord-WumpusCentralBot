@@ -4,6 +4,9 @@
 ## Description:
 ## This util is used for generating fancy logs messages in the hoster console
 ## Will be used for client events, commands and bot tasks
+##
+## Used in:
+##   - ./main.py
 
 from colorama import Fore
 
