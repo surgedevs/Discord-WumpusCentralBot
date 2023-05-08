@@ -4,7 +4,7 @@
 ## Description:
 ## This is main.py while which we will be using for running this bot.
 
-import discord ## pip install py-cord - not discordpy
+import discord ## `pip install py-cord` - not discordpy
 import json
 import os
 import time
@@ -12,7 +12,6 @@ import asyncio
 from utils import workerLogs
 from lib import supportTask
 
-## Loading all configuration files which will be used by our client and bot
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'userConfig.json')
 with open(config_path) as userConfigFile:
     userConfig = json.load(userConfigFile)
@@ -21,7 +20,6 @@ config_path = os.path.join(os.path.dirname(__file__), 'config', 'clientConfig.js
 with open(config_path) as clientConfigFile:
     clientConfig = json.load(clientConfigFile)
 
-## Declared discord.Bot() as a `bot`, may be changes in the future
 bot = discord.Bot()
 
 ## Place for slash commands

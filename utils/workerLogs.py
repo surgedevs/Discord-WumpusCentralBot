@@ -19,7 +19,6 @@ def userUsedCommand(member, commandName, executeType):
     ##     * 1 = PREFIX COMMAND
     ##     * 2 = SLASH COMMAND
 
-    ## Setting up convertion
     if executeType == 1:
         commandExecutionMethod = str('prefix command')
     elif executeType == 2:
