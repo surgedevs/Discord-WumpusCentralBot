@@ -33,9 +33,12 @@ async def testing(ctx):
 
 ## Place for Bot tasks
 async def supportTrackerTask():
+    await bot.wait_until_ready()
     while True:
-        print("Message") ## Debug stuff
-        await asyncio.sleep(clientConfig['secondsBetweenContentNextVerify'])
+        print(workerLogs.supportTracker(stage=1))
+
+        ## Everything is done now so this task can now wait until next loop
+        await asyncio.sleep(clientConfig['secondsBetweenRSSContentNextVerify'])
 
 ## Client Startup
 bot.loop.create_task(supportTrackerTask()) ## Support Changes

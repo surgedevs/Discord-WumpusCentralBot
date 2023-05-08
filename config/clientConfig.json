@@ -1,5 +1,5 @@
 {
-    "secondsBetweenContentNextVerify": 60,
+    "secondsBetweenRSSContentNextVerify": 60,
     "channels": {
         "supportChangesChannel": "1104428547289923616",
         "dataminingChannel": "1087801779049209858"
