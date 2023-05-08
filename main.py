@@ -9,6 +9,7 @@ import json
 import os
 import time
 import asyncio
+import colorama
 
 ## Loading all configuration files which will be used by our client and bot
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'userConfig.json')
@@ -18,15 +19,6 @@ with open(config_path) as userConfigFile:
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'clientConfig.json')
 with open(config_path) as clientConfigFile:
     clientConfig = json.load(clientConfigFile)
-
-## Def of all main and important variables which will be used later in our code
-discordAuthToken = str(userConfig['discordAuth'])
-channelSupportChanges = str(clientConfig['secondsBetweenContentNextVerify'])
-channelDatamining = str(clientConfig['secondsBetweenContentNextVerify'])
-SupportChangesGitLabRSS = str('https://gitlab.com/derpystuff/discord-support/-/commits/main?format=atom')
-AssetsChangesGitLabRSS = str('https://gitlab.com/derpystuff/discord-asset-datamining/-/commits/master?format=atom')
-
-verifyCooldown = int(clientConfig['secondsBetweenContentNextVerify'])
 
 ## Idk what is that thing doing but okay :troll:
 bot = discord.Bot()
@@ -40,8 +32,8 @@ async def hello(ctx):
 async def supportTrackerTask():
     while True:
         print("Message") ## Debug stuff
-        await asyncio.sleep(verifyCooldown)
+        await asyncio.sleep(clientConfig['secondsBetweenContentNextVerify'])
 
 # goofy ooh ahhh bot startup
 bot.loop.create_task(supportTrackerTask()) ## Support Changes
-bot.run(discordAuthToken)
+bot.run(userConfig['discordAuth'])
