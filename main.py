@@ -1,16 +1,19 @@
-## Author: @DzikStar
-## Contributors: @DzikStar
-##
-## Description:
-## This is main.py while which we will be using for running this bot.
+"""
+:author @DzikStar
+:contributors @DzikStar
 
-import discord ## `pip install py-cord` - not discordpy
+This is main.py while which we will be using for running this bot.
+"""
+
+import discord
 import json
 import os
-import time
 import asyncio
-from utils import workerLogs
-from lib import supportTask
+
+import enums.Stage
+from utils import worker_logs
+from lib import support_task
+from discord.ext import commands, tasks
 
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'userConfig.json')
 with open(config_path) as userConfigFile:
@@ -22,29 +25,56 @@ with open(config_path) as clientConfigFile:
 
 bot = discord.Bot()
 
-## Place for slash commands
-@bot.slash_command(name = "testing", description = "super duper testing command")
-async def testing(ctx):
-    ## This command is replyign with a message to a user, nothing more. Using 
-    await ctx.respond("Hey! We're actually testing some stuff with our bot. If you are interested in development of our bot then you can be interested :troll:")
-    print(workerLogs.userUsedCommand(member=str(ctx.author.name), commandName=str('testing'), executeType=int(2)))
 
-## Place for Bot tasks
-async def supportTrackerTask():
-    await bot.wait_until_ready()
-    firstLaunch = bool(True)
-    while True:
-        if firstLaunch == True:
-            ## Downloading two RSS files
-            ## First file is older, it's from our database repository
-            ## Seconds is a new file, it's RSS from big nutty GitLab repository
-            supportTask.importAllFiles(GHPAtoken=userConfig['githubDatabasePAToken'])
+@bot.slash_command(name="testing", description="super duper testing command")
+async def testing(ctx: commands.Context) -> None:
+    """
+    Replies with a predetermined message.
 
-        print(workerLogs.supportTracker(stage=1))
+    :param ctx: discord.ext.commands.Context
+    :return: None
+    """
 
-        ## Everything is done now so this task can now wait until next loop
-        await asyncio.sleep(clientConfig['secondsBetweenRSSContentNextVerify'])
+    await ctx.reply(
+        "Hey! We're actually testing some stuff with our bot. "
+        + "If you are interested in development of our bot then you can be interested :troll:"
+    )
 
-## Client Startup
-bot.loop.create_task(supportTrackerTask()) ## Support Changes
+    print(
+        worker_logs.user_used_command(
+            member=ctx.author.name,
+            command_name='testing',
+            execute_type=2
+        )
+    )
+
+
+@tasks.loop()
+async def support_tracker_task() -> None:
+    """
+    Function for various Bot tasks
+
+    :return: None
+    """
+
+    print(worker_logs.support_tracker(enums.Stage.Stage.AFTER_STARTUP))
+
+    # wait until next loop
+    await asyncio.sleep(clientConfig['secondsBetweenRSSContentNextVerify'])
+
+
+def support_tracker_first_launch() -> None:
+    """
+    first launch of the support_tracker
+
+    :return: None
+    """
+
+    # Downloads RSS files from our db repo (older) and from BigNutty's repo (newer)
+    support_task.import_all_files(ghp_atoken=userConfig['githubDatabasePAToken'])
+
+
+# Startup
+support_tracker_first_launch()
+support_tracker_task.start()
 bot.run(userConfig['discordAuth'])
